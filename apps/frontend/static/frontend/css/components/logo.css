@@ -1,0 +1,14 @@
+.logo-md {
+    font: 600 2.5rem/100% var(--font-family);
+    color: var(--text-secondary);
+    span {
+        font: 600 2.5rem/100% var(--font-family);
+        color: var(--brand-primary);
+    }
+    img{
+        margin-bottom: .5rem;
+        display: block;
+        margin-inline: auto;
+        width: 70px;
+    }
+}

@@ -1,0 +1,30 @@
+:root {
+    --font-family: 'Poppins', sans-serif;
+
+    --bg-primary: #f0f0f0;
+    --bg-secondary: #ffffff;
+    --brand-primary: #003d8f;
+    --brand-secondary: #0050b3;
+    --brand-tertiary: #1a65c7;
+    --text-primary: #192232;
+    --text-secondary: #344354;
+}
+
+*, button, input, textarea {
+    font: 500 1rem/140% var(--font-family);
+    color: var(--text-primary);
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+}
