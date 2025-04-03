@@ -1,0 +1,33 @@
+.login {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--brand-primary);
+    .container {
+        gap: 2rem;
+        width: 400px;
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            .errorlist{
+                list-style: none;
+                font: 400 .8rem/140% var(--text-family);
+                li{
+                    color: var(--danger);
+                    margin-bottom: .3rem;
+                }
+            }
+
+            .errorlist li::before {
+                font-size: 20px;
+                content: "⚠ ";
+                margin-right: 2px;
+            }
+        }
+    }
+}

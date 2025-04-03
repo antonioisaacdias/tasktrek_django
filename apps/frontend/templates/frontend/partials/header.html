@@ -1,0 +1,21 @@
+{% load static %}
+
+<header class="header container">
+    <div class="logo-line">
+        <img src="{% static 'frontend/svgs/trek-blue.svg' %}" alt="">
+        Task<span>Trek</span>
+    </div>
+    <div class="options-wrapper">
+        <form action="">
+            <input class="input input-primary-sm" type="text">
+            <button class="btn btn-primary">Buscar</button>
+        </form>
+        <button class="btn btn-success">
+            <i class="fa-solid fa-plus"></i>
+            Nova tarefa
+        </button>
+        <a class="btn"">
+            <i class="fa-regular fa-user fa-2x"></i>
+        </a>
+    </div>
+</header>

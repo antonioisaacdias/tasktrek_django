@@ -12,3 +12,20 @@
         width: 70px;
     }
 }
+
+.logo-line{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    font: 600 2.5rem/100% var(--font-family);
+    color: var(--text-secondary);
+    span {
+        font: 600 2.5rem/100% var(--font-family);
+        color: var(--brand-primary);
+    }
+    img{
+        margin-right: .5rem;
+        width: 50px;
+    }
+}

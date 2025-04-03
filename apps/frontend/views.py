@@ -31,7 +31,6 @@ def home_view(request):
     timestamp = now().timestamp()
     return render(request, 'frontend/home.html', {'timestamp': timestamp})    
 
-
 @login_required(login_url='login')
 def logout_view(request):
     logout(request)
