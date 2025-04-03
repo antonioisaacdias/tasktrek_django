@@ -8,6 +8,7 @@
     --brand-tertiary: #1a65c7;
     --text-primary: #192232;
     --text-secondary: #344354;
+    --text-tertiary: #B0B0C0;
 
 
     --text-success: #155724;
@@ -29,6 +30,7 @@
 }
 
 * {
+    list-style: none;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -39,6 +41,7 @@ body, html{
     flex-direction: column;
     min-height: 100vh;
     width: 100%;
+    background-color: var(--bg-primary);
 }
 
 .container {
