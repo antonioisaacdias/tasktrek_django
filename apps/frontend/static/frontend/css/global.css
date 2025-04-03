@@ -8,6 +8,17 @@
     --brand-tertiary: #1a65c7;
     --text-primary: #192232;
     --text-secondary: #344354;
+
+
+    --text-success: #155724;
+    --text-danger: 	#721c24;
+    --text-warning:#856404;
+
+    --success: #5cb85c;
+    --danger: #d9534f;
+    --warning: 	#f0ad4e;
+
+
 }
 
 *, button, input, textarea {
