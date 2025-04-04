@@ -63,3 +63,29 @@
     }
 }
 
+.btn-invisible:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.btn-add-task {
+    display: flex;
+    flex-direction: column;
+    gap: .2rem;
+    align-items: center;
+    font-size: 1.5rem;
+    
+    i{
+        font-size: 3rem;
+    }
+}
+
+.btn-add-task:hover {
+    color: var(--brand-tertiary);
+    transition: all 0.3s ease;
+    
+    i{
+        transition: all 0.3s ease;
+        color: var(--brand-tertiary);
+    }
+}
