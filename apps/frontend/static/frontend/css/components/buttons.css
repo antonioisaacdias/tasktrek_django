@@ -54,6 +54,24 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+.btn-neutral {
+    background-color: var(--neutral);
+    color: var(--bg-secondary);
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    gap: .1rem; 
+    i {
+        color: var(--bg-secondary);
+        margin-right: .1rem;
+    }
+}
+
+.btn-neutral:hover {
+    background-color: var(--neutral-hover);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
 .btn-invisible {
 
     background-color: transparent;

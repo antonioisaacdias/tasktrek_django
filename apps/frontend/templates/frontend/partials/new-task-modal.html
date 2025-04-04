@@ -1,13 +1,40 @@
 {% load static %}
 
-<input type="checkbox" id="modal-toggle" hidden>
+<input type="checkbox" id="new-task-toggle" hidden>
 
-<div class="modal">
+<div class="new-task-modal">
     <label for="modal-toggle" class="overlay"></label> <!-- Fecha ao clicar fora -->
   
     <div class="modal-content">
-      <h2>Olá!</h2>
-      <p>Esse é um modal feito com CSS puro.</p>
-      <label for="modal-toggle" class="close-btn">Fechar</label>
+      <header>
+        <h2>Nova tarefa</h2>
+        <label for="new-task-toggle" class="btn btn-invisible"><i class="fa-solid fa-xmark"></i></label>
+      </header>
+      <form action="">
+        <input type="text" placeholder="Título da tarefa" required class="name-input">
+        <textarea placeholder="Comentários" class="comment-input"></textarea>
+        <div class="input-wrapper">
+          <input type="date" required class="date-input" id="date-input">
+          <input type="time" required class="time-input">
+          <select name="project" class="project-select">
+            <option value="" class="placeholder" selected disabled>Selecione um projeto</option>
+            <option value="1">
+              Projeto 1
+            </option>
+            <option value="2">
+              Projeto 2
+            </option>
+            <option value="3">
+              Projeto 3
+            </option>
+          </select>
+        </div>
+        <footer>
+          <label for="new-task-toggle" class="btn btn-neutral">Cancelar</label>
+          <button type="submit" class="btn btn-primary">Criar</button>
+
+        </footer>
+      </form>
+
     </div>
 </div>
