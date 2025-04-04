@@ -21,8 +21,8 @@ class ProjectAdmin(admin.ModelAdmin):
     
 @admin.register(Task)    
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'comments', 'created_at', 'updated_at', 'expires_at', 'is_completed', 'user', 'project')
-    search_fields = ('name', 'comments')
+    list_display = ('id', 'name', 'comments', 'created_at', 'updated_at', 'expire_date', 'expire_time', 'is_completed', 'user', 'project')
+    search_fields = ('name', 'comments', 'expire_date', 'expire_time')
     list_filter = ('is_completed',)
     ordering = ('-created_at',)
     date_hierarchy = 'created_at'

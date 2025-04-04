@@ -10,23 +10,25 @@
         <h2>Nova tarefa</h2>
         <label for="new-task-toggle" class="btn btn-invisible"><i class="fa-solid fa-xmark"></i></label>
       </header>
-      <form action="">
-        <input type="text" placeholder="Título da tarefa" required class="name-input">
-        <textarea placeholder="Comentários" class="comment-input"></textarea>
+      <form 
+        hx-post="{% url 'new_task' %}" 
+        hx-swap="none"
+        hx-on="htmx:afterRequest: this.reset();"
+      >
+        {% csrf_token %}
+        <input type="text" placeholder="Título da tarefa" required class="name-input" name="name">
+        <textarea placeholder="Comentários" class="comment-input" name="comments"></textarea>
         <div class="input-wrapper">
-          <input type="date" required class="date-input" id="date-input">
-          <input type="time" required class="time-input">
-          <select name="project" class="project-select">
+          <input type="date" class="date-input" id="date-input" name="date">
+          <input type="time" class="time-input" name="time">
+          <select
+            name="project" 
+            class="project-select"
+          >
             <option value="" class="placeholder" selected disabled>Selecione um projeto</option>
-            <option value="1">
-              Projeto 1
-            </option>
-            <option value="2">
-              Projeto 2
-            </option>
-            <option value="3">
-              Projeto 3
-            </option>
+            {% for project in projects %}
+              <option value="{{ project.id }}">{{ project.name }}</option>
+            {% endfor %}
           </select>
         </div>
         <footer>

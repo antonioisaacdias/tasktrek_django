@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
+from ..backend.models import Project
 
 from django.utils.timezone import now
 from .forms import LoginForm
@@ -29,10 +30,21 @@ def login_view(request):
 @login_required(login_url='login')
 def home_view(request):
     timestamp = now().timestamp()
-    return render(request, 'frontend/home.html', {'timestamp': timestamp})    
+    projects = Project.objects.filter(user=request.user, is_active=True).order_by('name')
+    projects_list = []
+    
+    for project in projects:
+        projects_list.append({
+            'id': project.id,
+            'name': project.name,
+            'color': project.color,
+        })
+    
+    return render(request, 'frontend/home.html', {'timestamp': timestamp, 'projects': projects_list})
 
 @login_required(login_url='login')
 def logout_view(request):
     logout(request)
     return redirect('login')
+
 
