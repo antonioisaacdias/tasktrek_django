@@ -2,13 +2,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 1rem;
     font-size: 1rem;
     padding: 8px 16px;
     font-weight: bold;
     outline: none;
     cursor: pointer;
     border: none;
-    border-radius: 8px;
+    border-radius: 50px;
     transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
 }
 
@@ -54,10 +55,11 @@
 }
 
 .btn-invisible {
+
     background-color: transparent;
     color: var(--text-primary);
     i{
         font-size: 1.5rem;
-        margin-right: 1rem;
     }
 }
+
