@@ -10,10 +10,15 @@
             <input class="input input-primary-sm" type="text">
             <button class="btn btn-primary">Buscar</button>
         </form>
-        <label class="btn btn-success" for="new-task-toggle">
+        <button 
+            class="btn btn-success"
+            hx-get="{% url 'create_task_modal' %}" 
+            hx-target="body" 
+            hx-swap="beforeend"
+        >
             <i class="fa-solid fa-plus"></i>
             Nova tarefa
-        </label>
+        </button>
         <a class="btn"">
             <i class="fa-regular fa-user fa-2x"></i>
         </a>

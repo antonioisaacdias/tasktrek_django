@@ -3,17 +3,24 @@ from django.http import HttpResponse
 from .models import Project, Task
 
 @login_required(login_url='login')
-def new_task_view(request):
+def create_task_view(request):
     name = request.POST.get('name')
     date = request.POST.get('date')
     time = request.POST.get('time')
     comments = request.POST.get('comments')
     project_id = request.POST.get('project')
-
-    try:
-        project = Project.objects.get(id=project_id, user=request.user)
-    except Project.DoesNotExist:
-        return HttpResponse('Projeto inválido', status=404)
+    
+    if time == "":
+        time = None
+        
+    if project_id != None:
+        try:
+            project = Project.objects.get(id=project_id, user=request.user)
+        except Project.DoesNotExist:
+            return HttpResponse('Projeto inválido', status=404)
+        
+    else:
+        project = project_id
         
     Task.objects.create(
         name=name,
@@ -23,7 +30,6 @@ def new_task_view(request):
         project=project,
         user=request.user
     )
-    
     
     return HttpResponse('Tarefa criada com sucesso!',status=201)
 

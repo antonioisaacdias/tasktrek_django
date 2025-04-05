@@ -1,11 +1,10 @@
 {% extends "frontend/base.html" %}
 {% load static %}
 {% block content %}
-    {% include 'frontend/partials/header.html'%}
+    {% include 'frontend/components/header.html'%}
     <main class="home">
-        {% include 'frontend/partials/left-sidebar.html'%}
-        {% include 'frontend/partials/taskbar.html'%}
-        {% include 'frontend/partials/right-sidebar.html'%}
-        {% include 'frontend/partials/new-task-modal.html'%}
+        {% include 'frontend/components/left-sidebar.html'%}
+        {% include 'frontend/components/taskbar.html'%}
+        {% include 'frontend/components/right-sidebar.html'%}
     </main>
 {% endblock %}

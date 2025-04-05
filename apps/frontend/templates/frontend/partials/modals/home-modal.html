@@ -1,0 +1,24 @@
+{% load static %}
+
+<div class="home-modal" id="home-modal">
+
+    <label for="modal-toggle" class="overlay"></label> 
+  
+    <div class="modal-content">
+      <header>
+        <h2>Nova tarefa</h2>
+
+        <button 
+            for="new-task-toggle" 
+            class="btn btn-invisible"
+            @click="$el.closest('#home-modal').remove()"
+        >
+            <i class="fa-solid fa-xmark"></i></button>
+        </button>
+
+      </header>
+      <div id="form-content" name="form-content"></div>
+
+
+    </div>
+</div>

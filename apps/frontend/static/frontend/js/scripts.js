@@ -5,6 +5,5 @@ document.querySelectorAll('textarea').forEach(el => {
     });
 });
 
-const input = document.getElementById('date-input');
-const hoje = new Date().toISOString().split('T')[0];
-input.value = hoje;
+
+

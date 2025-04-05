@@ -47,4 +47,8 @@ def logout_view(request):
     logout(request)
     return redirect('login')
 
+@login_required(login_url='login')
+def create_task_modal_view(request):
+    timestamp = now().timestamp()
+    return render(request, 'frontend/partials/modals/home-modal.html', {'timestamp': timestamp})
 
