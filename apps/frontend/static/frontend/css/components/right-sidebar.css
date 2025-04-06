@@ -2,6 +2,9 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 10rem;
     padding-bottom: 5rem;
+    padding-left: 3rem;
+    align-items: center;   
 }

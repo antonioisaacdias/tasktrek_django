@@ -2,9 +2,7 @@
     flex: 1;
     display: grid;
     grid-template-columns: 1.5fr 3fr 1.5fr;
-    gap: 2rem;
     margin-inline: 1rem;
     margin-bottom: 1rem;
-    justify-items: center;
 }
 

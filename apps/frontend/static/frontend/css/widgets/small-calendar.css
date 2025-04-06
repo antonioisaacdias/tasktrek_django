@@ -1,5 +1,6 @@
 .small-calendar{
     padding: 1rem;
+    width: 320px;
 
     header{
         display: flex;
@@ -10,8 +11,7 @@
     }
 
     table{
-        width: 300px;
-
+        width: 100%;
         border-collapse: collapse;
         overflow: hidden;
         tr{

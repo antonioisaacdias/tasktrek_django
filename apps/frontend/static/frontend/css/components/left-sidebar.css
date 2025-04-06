@@ -1,9 +1,13 @@
+.left-sidebar{
+    padding-right: 3rem;
+}
 
 .left-menu{
     display: flex;
     flex-direction: column;
     height: 100%;
     width: 100%;
+
 
     li{
         padding: 1rem;
