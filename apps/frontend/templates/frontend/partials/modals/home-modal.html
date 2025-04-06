@@ -4,9 +4,12 @@
 
     <label for="modal-toggle" class="overlay"></label> 
   
-    <div class="modal-content">
+    <div class="modal-content"
+      @click.outside="
+        document.getElementById('home-modal').remove();"
+    >
       <header>
-        <h2>Nova tarefa</h2>
+        <h2>{{ modal_title }}</h2>
 
         <button 
             for="new-task-toggle" 
@@ -17,7 +20,11 @@
         </button>
 
       </header>
-      <div id="form-content" name="form-content"></div>
+      <div id="form-content" name="form-content" class="form-content">
+
+        {% block modal_content %}
+        {% endblock %}
+      </div>
 
 
     </div>

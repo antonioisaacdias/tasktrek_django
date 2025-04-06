@@ -1,0 +1,69 @@
+{% extends "frontend/partials/modals/home-modal.html" %}
+{% load static %}
+{% block modal_content %}
+    <form 
+        x-ref="form"
+        x-data="{
+            erro: '',
+            sucesso: '',
+            exibirErro(event) {
+                try {
+                    const data = JSON.parse(event.detail.xhr.responseText);
+                    const msg = Object.values(data)[0];
+                    this.erro = Array.isArray(msg) ? msg[0] : msg;
+                    this.sucesso = '';
+                } catch (e) {
+                    this.erro = 'Erro inesperado.';
+                }
+            },
+            exibirSucesso(event) {
+                if (event.detail.xhr.status === 201) {
+                    this.sucesso = 'Tarefa criada com sucesso!';
+                    this.erro = '';
+                    this.$refs.form.reset();
+                }
+            }
+        }"
+        @htmx:response-error="exibirErro($event)"
+        @htmx:after-on-load="exibirSucesso($event)"
+        hx-post="{% url 'create_task' %}"
+        hx-target="this"
+        hx-swap="none"
+    >
+        {% csrf_token %}
+        <p x-show="erro" x-text="erro" class="message error"></p>
+        <p x-show="sucesso" x-text="sucesso" class="message success"></p>
+        <input type="text" placeholder="Título da tarefa" required class="name-input" name="name">
+        <textarea placeholder="Comentários" class="comment-input" name="comments"></textarea>
+        <div 
+            class="input-wrapper"
+            x-data="{ projects: [], init() {
+                fetch('{% url 'list_active_projects' %}')
+                    .then(res => res.json())
+                    .then(data => {
+                        this.projects = data
+                    })
+                    .catch(err => console.error('Erro ao carregar projetos', err))
+            } }"
+            x-init="init"
+        >
+                <input type="date" class="date-input" id="date-input" name="expire_date">
+                <input type="time" class="time-input" name="expire_time">
+                <select
+                    name="project" 
+                    class="project-select"
+                    >
+                    <option value="" class="placeholder" selected disabled>Selecione um projeto</option>
+
+                    <template x-for="project in projects" :key="project.id">
+                        <option :value="project.id" x-text="project.name"></option>
+                    </template>
+                </select>
+            </div>
+        <footer>
+            <label for="new-task-toggle" class="btn btn-neutral">Cancelar</label>
+            <button type="submit" class="btn btn-primary">Criar</button>
+
+        </footer>
+    </form>
+{% endblock %}

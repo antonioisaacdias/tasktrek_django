@@ -30,17 +30,8 @@ def login_view(request):
 @login_required(login_url='login')
 def home_view(request):
     timestamp = now().timestamp()
-    projects = Project.objects.filter(user=request.user, is_active=True).order_by('name')
-    projects_list = []
     
-    for project in projects:
-        projects_list.append({
-            'id': project.id,
-            'name': project.name,
-            'color': project.color,
-        })
-    
-    return render(request, 'frontend/home.html', {'timestamp': timestamp, 'projects': projects_list})
+    return render(request, 'frontend/home.html', {'timestamp': timestamp})
 
 @login_required(login_url='login')
 def logout_view(request):
@@ -50,5 +41,5 @@ def logout_view(request):
 @login_required(login_url='login')
 def create_task_modal_view(request):
     timestamp = now().timestamp()
-    return render(request, 'frontend/partials/modals/home-modal.html', {'timestamp': timestamp})
+    return render(request, 'frontend/partials/modals/create-task-modal.html', {'timestamp': timestamp, 'modal_title': 'Nova tarefa'})
 

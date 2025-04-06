@@ -1,35 +1,28 @@
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from .serializers import TaskSerializer
+from rest_framework import status
 from .models import Project, Task
 
-@login_required(login_url='login')
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def create_task_view(request):
-    name = request.POST.get('name')
-    date = request.POST.get('date')
-    time = request.POST.get('time')
-    comments = request.POST.get('comments')
-    project_id = request.POST.get('project')
+    serializer = TaskSerializer(data=request.data)
     
-    if time == "":
-        time = None
-        
-    if project_id != None:
-        try:
-            project = Project.objects.get(id=project_id, user=request.user)
-        except Project.DoesNotExist:
-            return HttpResponse('Projeto inválido', status=404)
-        
-    else:
-        project = project_id
-        
-    Task.objects.create(
-        name=name,
-        comments=comments,
-        expire_date=date,
-        expire_time=time,
-        project=project,
-        user=request.user
-    )
+    if serializer.is_valid():
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def list_active_projects_view(request):
+    projects = Project.objects.filter(user=request.user, is_active=True).values('id', 'name', 'color').order_by('name')
     
-    return HttpResponse('Tarefa criada com sucesso!',status=201)
+    return Response(projects, status=status.HTTP_200_OK)
+    
+    
 
