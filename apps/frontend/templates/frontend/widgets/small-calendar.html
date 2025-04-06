@@ -1,0 +1,57 @@
+{% load static %}
+{% load extras %}
+    <div class="container small-calendar" id="small-calendar">
+        <header>
+            <button 
+                class="btn btn-invisible"
+                hx-get="{% url 'calendar_widget_date' context.last_month.year context.last_month.month %}"
+                hx-target="#small-calendar"
+                hx-swap="outerHTML"
+            >
+                <i class="fas fa-chevron-left"></i></button>
+            <span>{{context.month_name}} de {{context.year}}</span>
+                <button class="btn btn-invisible"
+                hx-get="{% url 'calendar_widget_date' context.next_month.year context.next_month.month %}"
+                hx-target="#small-calendar"
+                hx-swap="outerHTML"
+            >
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </header>
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">Dom</th>
+                    <th scope="col">Seg</th>
+                    <th scope="col">Ter</th>
+                    <th scope="col">Qua</th>
+                    <th scope="col">Qui</th>
+                    <th scope="col">Sex</th>
+                    <th scope="col">Sab</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr>
+                    {% for _ in 0|until:context.start %}
+                        <td></td>
+                    {% endfor %}
+                
+                    {% for day in context.days %}
+
+                        <td>
+                            <span class="radio-day">
+                                <input  type="radio" value="{{dia}}/{{context.mes}}/{{context.ano}}" name="day">
+                                <span>
+                                    {{day}}
+                                </span>
+                            </span>
+                        </td>
+                
+                        {% if forloop.counter0|add:context.start|add:1|divisibleby:7 %}
+                        </tr><tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tr>
+                </tbody>
+        </table>
+    </div>

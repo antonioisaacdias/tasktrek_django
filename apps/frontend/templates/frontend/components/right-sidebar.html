@@ -1,6 +1,16 @@
 {% load static %}
 
 <div class="right-sidebar">
+    <div 
+    class="container small-calendar"
+    id="small-calendar"
+    hx-get="{% url 'calendar_widget' %}"
+    hx-trigger="load"
+    hx-target="#small-calendar"
+    hx-swap="outerHTML"
+    >
+
+    </div>
     <button 
         class="btn btn-invisible btn-add-task"
         hx-get="{% url 'create_task_modal' %}" 

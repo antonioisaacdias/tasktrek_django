@@ -1,0 +1,84 @@
+.small-calendar{
+    padding: 1rem;
+
+    header{
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: .5rem;
+    }
+
+    table{
+        width: 300px;
+
+        border-collapse: collapse;
+        overflow: hidden;
+        tr{
+            display: flex;
+            flex-wrap: nowrap;
+        }
+        th, td {
+            width: 14.28%;
+
+            display: flex;
+            align-items: center;  
+            justify-content: center;   
+            font: 500 0.85rem/100% var(--font-family);
+        }
+
+        th{
+            color: var(--bg-secondary);
+            background-color: var(--brand-primary);
+            padding-block: 0.8rem;
+
+        }
+
+        td{
+            .radio-day{
+                margin: .5rem;
+                position: relative;
+                height: 100%;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                input{
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    opacity: 0;
+                    cursor: pointer;
+                }
+
+                span{
+                    border-radius: 999px;
+                    width: 25px;
+                    height: 25px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font: 500 0.85rem/100% var(--font-family);
+                }
+
+                &:has(input:checked){
+                    span{
+                        background-color: var(--brand-primary);
+                        color: var(--bg-secondary);
+                        font-weight: 600;
+                    }
+                }
+
+                &:hover{
+                    span{
+                        transition: all 0.3s;
+                        background-color: var(--brand-tertiary);
+                        color: var(--bg-secondary);
+                    }
+
+                }
+            }
+        }
+    }
+}
