@@ -43,6 +43,19 @@
             gap: 2rem;
             border-top: solid 1px var(--bg-primary);
 
+            .info{
+
+                .task-name{
+                    display: block;
+                }
+
+                .project-name{
+                    font: 500 .85rem/100% var(--font-family);
+                    color: var(--text-tertiary);
+
+                }
+            }
+
             button{
                 margin-left: auto;
                 &:hover{

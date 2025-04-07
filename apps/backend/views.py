@@ -32,8 +32,9 @@ def list_tasks_view(request, date):
     if date == 'today':
         date = localtime(now()).date().isoformat()
         tasks = Task.objects.filter(
-            Q(expire_date=date) | Q(expire_date__isnull=True),
-            Q(project__is_active=True) | Q(project__isnull=True)
+            Q(user=request.user) &
+            (Q(expire_date=date) | Q(expire_date__isnull=True)) &
+            (Q(project__is_active=True) | Q(project__isnull=True))
             ).values(
                 'id',
                 'name', 
@@ -43,6 +44,7 @@ def list_tasks_view(request, date):
                 'expire_time', 
                 'is_completed'
             ).order_by('expire_time')
+        
     
         return Response({
                 'date': date,
@@ -50,6 +52,7 @@ def list_tasks_view(request, date):
             }, status=status.HTTP_200_OK)
         
     tasks = Task.objects.filter(
+        Q(user=request.user) &
         Q(expire_date=date) &
         (Q(project__is_active=True) | Q(project__isnull=True))
         ).values(
@@ -66,3 +69,14 @@ def list_tasks_view(request, date):
             'date': date,
             'tasks': tasks
         }, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+def complete_task_view(request, id):
+    task =Task.objects.get(id=id)
+    
+    
+    task.is_completed = not task.is_completed
+    task.save()
+    serializer = TaskSerializer(task)
+    
+    return Response(serializer.data, status=status.HTTP_200_OK)

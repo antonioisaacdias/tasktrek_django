@@ -1,15 +1,51 @@
 {% load static %}
 
 <div class="taskbar">
-    <div class="container tasks">
+    <div 
+        class="container tasks"
+        x-data="{ data: [], init() {
+            fetch('{% url 'list_tasks_date' 'today' %}')
+                .then(res => res.json())
+                .then(data => {
+                    this.data = data
+                })
+                .catch(err => console.error('Erro ao carregar tarefas', err))
+            },
+            formatarDataBrasileira(iso) {
+                if (!iso) return '';
+                const [ano, mes, dia] = iso.split('-');
+                return `${dia}/${mes}/${ano}`;
+            }
+        }"
+        x-init="init" 
+    >
         <header>
-            <h3>Hoje (1)</h3>
+            <h3 x-text="formatarDataBrasileira(data.date)">Carregando...</h3>
             <button class="btn btn-invisible">
                 <i class="fa-solid fa-ellipsis-vertical"></i>
             </button>
         </header>
         <ul class="tasklist">
+            <template x-if="data.tasks && data.tasks.length === 0">
+                <li class="task">Nenhuma tarefa cadastrada...</li>
+            </template>
 
+            <template x-for="task in data.tasks" :key="task.id">
+                <li class="task">
+                    <input type="text" :value="task.id" hidden>
+                    <span class="check-wrapper">
+                        <i class="fa-solid fa-check"></i>
+                        <input type="checkbox" :checked="task.is_completed">
+                    </span>
+                    <div class="info">
+                        <span class="task-name" x-text="task.name"></span>
+                        <span class="project-name" x-text="task.project__name"></span>
+                    </div>
+                    <button class="btn btn-invisible">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                </li>
+            </template>
         </ul>
     </div>
 </div>

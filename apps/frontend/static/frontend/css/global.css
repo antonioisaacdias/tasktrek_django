@@ -53,3 +53,9 @@ body, html{
                 0 4px 8px rgba(0, 0, 0, 0.08);
 
 }
+
+@media (max-width: 768px) {
+    .hide-on-mobile {
+      display: none;
+    }
+}
