@@ -25,9 +25,19 @@ function exibirSucesso(event) {
   }
 }
 
-function formatarDataBr(dataIso) {
-  if (!dataIso) return '';
-  const [ano, mes, dia] = dataIso.split('-');
-  return `${dia}/${mes}/${ano}`;
+function completarTarefa(task) { 
+
+    fetch(`/api/tasks/complete/${task.id}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': document.querySelector('meta[name=csrf-token]').content
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        task.is_completed = data.is_completed  // atualiza visualmente
+    })
+    .catch(err => console.error('Erro ao completar tarefa', err))
 }
 

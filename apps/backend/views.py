@@ -73,10 +73,11 @@ def list_tasks_view(request, date):
 @api_view(['POST'])
 def complete_task_view(request, id):
     task =Task.objects.get(id=id)
-    
-    
     task.is_completed = not task.is_completed
     task.save()
     serializer = TaskSerializer(task)
+    
+    if task.user != request.user:
+        return Response({'erro': 'Esse usuário não possui essa permissão.'}, status=status.HTTP_401_UNAUTHORIZED)
     
     return Response(serializer.data, status=status.HTTP_200_OK)

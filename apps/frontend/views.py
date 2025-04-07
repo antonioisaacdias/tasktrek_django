@@ -46,6 +46,11 @@ def create_task_modal_view(request):
     return render(request, 'frontend/partials/modals/create-task-modal.html', {'timestamp': timestamp, 'modal_title': 'Nova tarefa'})
 
 @login_required(login_url='login')
+def update_task_modal_view(request):
+    timestamp = now().timestamp()
+    return render(request, 'frontend/partials/modals/update-task-modal.html', {'timestamp': timestamp, 'modal_title': 'Edição de tarefa'})
+
+@login_required(login_url='login')
 def calendar_widget_view(request, year=None, month=None):
     timestamp = now().timestamp()
     locale.setlocale(locale.LC_TIME, 'pt_BR.UTF-8')

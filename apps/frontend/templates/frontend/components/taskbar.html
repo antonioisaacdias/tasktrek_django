@@ -35,13 +35,21 @@
                     <input type="text" :value="task.id" hidden>
                     <span class="check-wrapper">
                         <i class="fa-solid fa-check"></i>
-                        <input type="checkbox" :checked="task.is_completed">
+                        <input 
+                            type="checkbox" 
+                            :checked="task.is_completed"
+                            @change="() => completarTarefa(task)"
+                        >
                     </span>
                     <div class="info">
                         <span class="task-name" x-text="task.name"></span>
                         <span class="project-name" x-text="task.project__name"></span>
                     </div>
-                    <button class="btn btn-invisible">
+                    <button 
+                        class="btn-update btn btn-invisible"
+                        data-url="{% url 'update_task_modal' %}"
+                        @click="htmx.ajax('GET', $el.dataset.url, { target: 'body', swap: 'beforeend' })"
+                    >
                         <i class="fa-solid fa-pen-to-square"></i>
                     </button>
                 </li>
