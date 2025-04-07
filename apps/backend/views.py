@@ -31,9 +31,27 @@ def list_active_projects_view(request):
 def list_tasks_view(request, date):
     if date == 'today':
         date = localtime(now()).date().isoformat()
+        tasks = Task.objects.filter(
+            Q(expire_date=date) | Q(expire_date__isnull=True),
+            Q(project__is_active=True) | Q(project__isnull=True)
+            ).values(
+                'id',
+                'name', 
+                'comments', 
+                'project__name', 
+                'expire_date', 
+                'expire_time', 
+                'is_completed'
+            ).order_by('expire_time')
+    
+        return Response({
+                'date': date,
+                'tasks': tasks
+            }, status=status.HTTP_200_OK)
+        
     tasks = Task.objects.filter(
-	    Q(expire_date=date) | Q(expire_date__isnull=True),
-		Q(project__is_active=True) | Q(project__isnull=True)
+        Q(expire_date=date) &
+        (Q(project__is_active=True) | Q(project__isnull=True))
         ).values(
             'id',
             'name', 
@@ -43,7 +61,7 @@ def list_tasks_view(request, date):
             'expire_time', 
             'is_completed'
         ).order_by('expire_time')
-    
+
     return Response({
             'date': date,
             'tasks': tasks
