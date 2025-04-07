@@ -60,8 +60,6 @@ def calendar_widget_view(request, year=None, month=None):
     last_month = current_month - relativedelta(months=1)
     next_month = current_month + relativedelta(months=+1)
     
-    print(last_month)
-    print(next_month)
     context = {
         'year': year,
         'month': month,
@@ -71,8 +69,5 @@ def calendar_widget_view(request, year=None, month=None):
         'days': days,
         'start': week_first_day + 1,
     }
-    
-    print(context)
 
-    
     return render(request, 'frontend/widgets/small-calendar.html',{'timestamp': timestamp, 'context': context})
